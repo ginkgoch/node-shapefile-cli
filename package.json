@@ -1,0 +1,15 @@
+{
+  "name": "shapefile-cli",
+  "version": "0.0.1",
+  "description": "This is command line tool for inspecting shapefiles.",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^2.16.0",
+    "ginkgoch-shapefile-reader": "^1.0.2"
+  }
+}
