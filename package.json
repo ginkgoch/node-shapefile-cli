@@ -1,5 +1,5 @@
 {
-  "name": "shapefile-cli",
+  "name": "ginkgoch-shapefile-cli",
   "version": "0.0.1",
   "description": "This is command line tool for inspecting shapefiles.",
   "main": "index.js",
