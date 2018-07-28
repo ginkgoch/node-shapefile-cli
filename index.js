@@ -7,8 +7,13 @@ program.version('1.0.0').usage('command [options] <file>')
 
 program.command('show-header <file>')
     .description('output a specified shapefile header information')
-    .option('-s, --stringify', 'output header with stringify data')
+    .option('-p, --pretty', 'output header with pretty table format')
     .action(require('./commands/showHeader'));
+
+program.command('show-fields <file>')
+    .description('output a specified shapefile fields information')
+    .option('-p, --pretty', 'output header with a pretty table format')
+    .action(require('./commands/showFields'));
 
 program.command('show-records <file>')
     .description('output a specified shapefile records information')

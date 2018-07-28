@@ -4,14 +4,17 @@
   "description": "This is command line tool for inspecting shapefiles.",
   "main": "index.js",
   "scripts": {
-    "test": "npm test"
+    "test": "npm test",
+    "show-header": "node index.js show-header ~/Downloads/data/shp/USStates.shp -p",
+    "show-fields": "node index.js show-fields ~/Downloads/data/shp/USStates.shp -p"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
     "commander": "^2.16.0",
-    "ginkgoch-shapefile-reader": "^1.0.5",
-    "lodash": "^4.17.10"
+    "ginkgoch-shapefile-reader": "^1.0.6",
+    "lodash": "^4.17.10",
+    "table": "^4.0.3"
   },
   "repository": {
     "type": "git",
