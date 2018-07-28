@@ -12,12 +12,10 @@ program.command('show-header <file>')
 
 program.command('show-records <file>')
     .description('output a specified shapefile records information')
-    .option('-l, --limit <n>', 'returning records limit. Default to 0 means all records', parseInt)
+    .option('-l, --limit <n>', 'returning records limit. accept any number. 0 means all records. default to 10', parseInt)
     .option('-c, --columns <items>', 'returning columns include in the results. Multiple columns are supported by separater ",". Default to all columns', val => val.split(','))
     .option('-g, --geom', 'includes geometry in the returned table')
-    .action((file, cmd) => {
-        console.log(file, cmd.limit, cmd.columns.length);
-    });
+    .action(require('./commands/showRecords'));
 
 program.command('convert <file>')
     .description('convert a specified shapefile to another type')

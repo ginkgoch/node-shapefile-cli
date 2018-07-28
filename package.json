@@ -10,7 +10,8 @@
   "license": "MIT",
   "dependencies": {
     "commander": "^2.16.0",
-    "ginkgoch-shapefile-reader": "^1.0.3"
+    "ginkgoch-shapefile-reader": "^1.0.5",
+    "lodash": "^4.17.10"
   },
   "repository": {
     "type": "git",
