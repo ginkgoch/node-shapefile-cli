@@ -1,6 +1,6 @@
 const _ = require('lodash');
 const table = require('table').table;
-const Shapefile = require('ginkgoch-shapefile-reader');
+const Shapefile = require('ginkgoch-shapefile-reader').Shapefile;
 const truncateOption = { length: 30 };
 
 async function loadRecords(file, cmd) {

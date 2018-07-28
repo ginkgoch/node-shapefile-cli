@@ -1,6 +1,6 @@
 const _ = require('lodash');
 const table = require('table').table;
-const Shapefile = require('ginkgoch-shapefile-reader');
+const Shapefile = require('ginkgoch-shapefile-reader').Shapefile;
 
 module.exports = async function(file, cmd) {
     const shapefile = new Shapefile(file);
