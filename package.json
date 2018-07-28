@@ -6,7 +6,8 @@
   "scripts": {
     "test": "npm test",
     "show-header": "node index.js show-header ~/Downloads/data/shp/USStates.shp -p",
-    "show-fields": "node index.js show-fields ~/Downloads/data/shp/USStates.shp -p"
+    "show-fields": "node index.js show-fields ~/Downloads/data/shp/USStates.shp -p",
+    "show-records": "node index.js show-records ~/Downloads/data/shp/USStates.shp -g -l 0 -c STATE_NAME,RECID"
   },
   "author": "",
   "license": "MIT",
