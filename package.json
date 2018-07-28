@@ -10,6 +10,10 @@
   "license": "MIT",
   "dependencies": {
     "commander": "^2.16.0",
-    "ginkgoch-shapefile-reader": "^1.0.2"
+    "ginkgoch-shapefile-reader": "^1.0.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ginkgoch/node-shapefile-cli"
   }
 }
