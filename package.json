@@ -1,0 +1,31 @@
+{
+  "name": "ginkgoch-shapefile-cli",
+  "version": "0.0.1",
+  "description": "This is command line tool for inspecting shapefiles.",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test",
+    "show-header": "node index.js show-header ~/Downloads/data/shp/USStates.shp -p",
+    "show-fields": "node index.js show-fields ~/Downloads/data/shp/USStates.shp -p",
+    "show-records": "node index.js show-records ~/Downloads/data/shp/USStates.shp -p -g -l 10 -c STATE_NAME,RECID"
+  },
+  "author": {
+    "name": "Ginkgoch",
+    "email": "ginkgoch@outlook.com",
+    "url": "https://github.com/ginkgoch"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^2.16.0",
+    "ginkgoch-shapefile-reader": "^1.0.6",
+    "lodash": "^4.17.10",
+    "table": "^4.0.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ginkgoch/node-shapefile-cli"
+  },
+  "bin": {
+    "shapefile-cli": "./index.js"
+  }
+}
