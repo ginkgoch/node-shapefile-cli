@@ -3,7 +3,11 @@ This is a command line tool to help to inspect a specified shapefile. It provide
 
 ## Install
 ```terminal
-npm i --save ginkgoch-shapefile-cli
+# global install
+npm i -g ginkgoch-shapefile-cli
+
+# local install
+# npm i --save ginkgoch-shapefile-cli
 ```
 
 ## Help
