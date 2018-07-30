@@ -23,6 +23,7 @@
 ╚══════════════╧════════════╧═══════╧════════════════════════════════╝
 
 Reading complete. 10/51 record(s)
+
 Tips:
  - set option -l, --limit to 0 to read all records
  - use option -g, --geom to 0 to read all records with geometry
