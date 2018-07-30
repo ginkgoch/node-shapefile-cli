@@ -5,7 +5,7 @@ module.exports = {
     testEnv: async function(action) {
         return await new Promise(async res => {
             let outputData = '';
-            const storeLog = inputs => (outputData += inputs + '\n');
+            const storeLog = inputs => (outputData += (inputs || '') + '\n');
             console['log'] = jest.fn(storeLog);
     
             await action();

@@ -34,7 +34,7 @@ module.exports = async function(file, cmd) {
                 tableData.push(row);
             } else {
                 console.log(JSON.stringify(record));
-                console.log('');
+                console.log();
             }
             counter++;
 
@@ -52,6 +52,7 @@ module.exports = async function(file, cmd) {
             console.log(`Reading complete. ${counter}/${count} record(s)`);
         }
 
+        console.log();
         console.log(`Tips:`);
         console.log(` - set option -l, --limit to 0 to read all records`);
         console.log(` - use option -g, --geom to 0 to read all records with geometry`);
