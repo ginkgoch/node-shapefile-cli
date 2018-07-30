@@ -1,0 +1,1 @@
+{"fileCode":9994,"fileLength":222344,"version":1000,"fileType":"Polygon","envelope":{"minx":-178.21502685546875,"miny":18.924781799316406,"maxx":-66.9698486328125,"maxy":71.40664672851562}}

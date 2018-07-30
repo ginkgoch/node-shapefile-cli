@@ -3,14 +3,14 @@ const table = require('table').table;
 const Shapefile = require('ginkgoch-shapefile-reader').Shapefile;
 const truncateOption = { length: 30 };
 
-async function loadRecords(file, cmd) {
+module.exports = async function(file, cmd) {
     const limit = _.isUndefined(cmd.limit) ? 10 : cmd.limit;
     const columns = cmd.columns || 'all';
     const geom = cmd.geom || false;
 
     const shapefile = new Shapefile(file);
     await shapefile.openWith(async () => {
-        const records = await shapefile.iterator(columns);
+        const records = await shapefile.iterator({ fields: columns });
         let record = undefined;
         let counter = 0;
         let headers = undefined;
@@ -34,7 +34,7 @@ async function loadRecords(file, cmd) {
                 tableData.push(row);
             } else {
                 console.log(JSON.stringify(record));
-                console.log();
+                console.log('');
             }
             counter++;
 
@@ -49,20 +49,13 @@ async function loadRecords(file, cmd) {
 
         const count = await shapefile.count();
         if (count > counter) {
-            console.log();
             console.log(`Reading complete. ${counter}/${count} record(s)`);
         }
 
-        console.log();
         console.log(`Tips:`);
         console.log(` - set option -l, --limit to 0 to read all records`);
         console.log(` - use option -g, --geom to 0 to read all records with geometry`);
         console.log(` - use option -p, --pretty to return data with pretty table format`);
         console.log(` - use option -c, --column to return necessary fields. e.g. -c field1,field2 returns two fields`);
-
     });
-}
-
-module.exports = function (file, cmd) {
-    loadRecords(file, cmd);
 }

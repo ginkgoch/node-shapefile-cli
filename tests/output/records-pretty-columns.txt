@@ -1,0 +1,30 @@
+╔══════════════╤════════════╤═══════╗
+║ STATE_NAME   │ SUB_REGION │ RECID ║
+╟──────────────┼────────────┼───────╢
+║ Washington   │ Pacific    │ 1     ║
+╟──────────────┼────────────┼───────╢
+║ Montana      │ Mtn        │ 2     ║
+╟──────────────┼────────────┼───────╢
+║ Maine        │ N Eng      │ 3     ║
+╟──────────────┼────────────┼───────╢
+║ North Dakota │ W N Cen    │ 4     ║
+╟──────────────┼────────────┼───────╢
+║ South Dakota │ W N Cen    │ 5     ║
+╟──────────────┼────────────┼───────╢
+║ Wyoming      │ Mtn        │ 6     ║
+╟──────────────┼────────────┼───────╢
+║ Wisconsin    │ E N Cen    │ 7     ║
+╟──────────────┼────────────┼───────╢
+║ Idaho        │ Mtn        │ 8     ║
+╟──────────────┼────────────┼───────╢
+║ Vermont      │ N Eng      │ 9     ║
+╟──────────────┼────────────┼───────╢
+║ Minnesota    │ W N Cen    │ 10    ║
+╚══════════════╧════════════╧═══════╝
+
+Reading complete. 10/51 record(s)
+Tips:
+ - set option -l, --limit to 0 to read all records
+ - use option -g, --geom to 0 to read all records with geometry
+ - use option -p, --pretty to return data with pretty table format
+ - use option -c, --column to return necessary fields. e.g. -c field1,field2 returns two fields
