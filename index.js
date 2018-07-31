@@ -23,13 +23,11 @@ program.command('show-records <file>')
     .option('-p, --pretty', 'output records with a pretty table format')
     .action(require('./commands/showRecords'));
 
-program.command('convert <file>')
-    .description('Convert shapefile to another type - **not supported yet**')
-    .option('-t, --type <value>', 'destination type to convert to. Supported types are json|csv|png')
+program.command('convert-geojson <file>')
+    .description('Convert shapefile to GeoJson')
+    .option('-c, --columns <items>', 'returning columns include in the results. Multiple columns are supported by separater ",". Default to all columns', val => val.split(','))
     .option('-o, --output <value>', 'output file path. If only directory is specified, the same file name will be used. Default to the same folder of the source Shapefile')
-    .action((file, cmd) => {
-        console.log('unsupported yet! contact ginkgoch@outlook.com if needed');
-    });
+    .action(require('./commands/convertGeoJson'));
 
 program.parse(process.argv);
 

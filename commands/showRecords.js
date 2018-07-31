@@ -19,18 +19,18 @@ module.exports = async function(file, cmd) {
         while ((record = await records.next()) && !record.done) {
             record = _.omit(record, ['done']);
             if (!geom) {
-                record = _.omit(record, ['geom', 'envelope']);
+                record = _.omit(record, ['geometry', 'envelope']);
             }
 
             if (cmd.pretty) {
                 if (!headers) {
-                    headers = _.keys(record.fields);
+                    headers = _.keys(record.properties);
                     cmd.geom && headers.push('geom');
                     tableData = [ headers ];
                 }
 
-                let row = _.values(record.fields);
-                cmd.geom && row.push(_.truncate(JSON.stringify(record.geom), truncateOption));
+                let row = _.values(record.properties);
+                cmd.geom && row.push(_.truncate(JSON.stringify(record.geometry), truncateOption));
                 tableData.push(row);
             } else {
                 console.log(JSON.stringify(record));
