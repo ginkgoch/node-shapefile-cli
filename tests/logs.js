@@ -16,7 +16,7 @@ module.exports = {
 
     execute: async function (option, expectedFilename, command, save = false) {
         const output = await this.testEnv(async () => {
-            const file = path.join(__dirname, 'data/USStates.shp');
+            const file = './tests/data/USStates.shp';
             const cmd = option;
             await command(file, cmd);
         });

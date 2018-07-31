@@ -7,7 +7,7 @@ This is a command line tool to help to inspect a specified shapefile. It provide
 npm i -g ginkgoch-shapefile-cli
 
 # local install
-# npm i --save ginkgoch-shapefile-cli
+npm i --save ginkgoch-shapefile-cli
 ```
 
 ## Help
@@ -26,7 +26,7 @@ Commands:
 show-header [options] <file>   output a specified shapefile header information
 show-fields [options] <file>   output a specified shapefile fields information
 show-records [options] <file>  output a specified shapefile records information
-convert [options] <file>       convert a specified shapefile to another type - **not supported yet**
+convert-geojson [options] <file>  Convert shapefile to GeoJson
 ```
 
 ## Show Header
@@ -157,6 +157,28 @@ Tips:
  - use option -g, --geom to 0 to read all records with geometry
  - use option -p, --pretty to return data with pretty table format
  - use option -c, --column to return necessary fields. e.g. -c field1,field2 returns two fields
+```
+
+## Convert to GeoJson
+Show records help
+```terminal
+shapefile-cli convert-geojson --help
+```
+
+Usage: `convert-geojson [options] <file>`
+
+Options:
+```terminal
+-c, --columns <items>  returning columns include in the results. Multiple columns are supported by separater ",". Default to all columns
+-o, --output <value>   output file path. If only directory is specified, the same file name will be used. Default to the same folder of the sourceShapefile
+-h, --help             output usage information
+```
+
+Example - converts a shapefile to GeoJson format.
+```terminal
+shapefile-cli convert-geojson ./tests/data/USStates.shp
+
+Conversion complete. New file is saved at ./tests/data/USStates.json.
 ```
 
 ## Issues
