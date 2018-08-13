@@ -20,7 +20,8 @@ module.exports = async function(file, cmd) {
         const featureCollection = { type: 'FeatureCollection' };
         const features = [];
         while ((record = await records.next()) && !record.done) {
-            record = _.omit(record, ['done']);
+            // record = _.omit(record, ['done']);
+            record = record.result;
             features.push(record);
         }
 
