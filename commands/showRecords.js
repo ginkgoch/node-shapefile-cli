@@ -17,7 +17,7 @@ module.exports = async function(file, cmd) {
         let tableData = undefined;
 
         while ((record = await records.next()) && !record.done) {
-            record = _.omit(record, ['done']);
+            record = record.result;
             if (!geom) {
                 record = _.omit(record, ['geometry', 'envelope']);
             }
