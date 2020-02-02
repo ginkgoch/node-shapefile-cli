@@ -1,6 +1,6 @@
 const fs = require('fs');
 const _ = require('lodash');
-const Shapefile = require('ginkgoch-shapefile-reader').Shapefile;
+const Shapefile = require('ginkgoch-shapefile').Shapefile;
 
 module.exports = async function(file, cmd) {
     const columns = cmd.columns || 'all';
