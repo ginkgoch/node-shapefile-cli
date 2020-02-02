@@ -10,11 +10,10 @@ module.exports = async function(file, cmd) {
         header.fileType = _.findKey(ShapefileType, v => v === header.fileType);
         header.fileType = _.capitalize(header.fileType);
         if (pretty) {
-            header.minx = header.envelope.minx;
-            header.miny = header.envelope.miny;
-            header.maxx = header.envelope.maxx;
-            header.maxy = header.envelope.maxy;
-            delete header.envelope;
+            header.minx = header.minx;
+            header.miny = header.miny;
+            header.maxx = header.maxx;
+            header.maxy = header.maxy;
             header = table(_.entries(header));
         } else { 
             header = JSON.stringify(header);
