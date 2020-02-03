@@ -1,6 +1,8 @@
 #! /usr/bin/env node
 
-const program = require('commander');
+let program = require('commander');
+
+program = new program.Command();
 
 program.version('1.0.0').usage('command [options] <file>')
     .description('This is a command line tool to help to inspect a specified shapefile.');
@@ -18,7 +20,7 @@ program.command('show-fields <file>')
 program.command('show-records <file>')
     .description('Output shapefile records information')
     .option('-l, --limit <n>', 'returning records limit. accept any number. 0 means all records. default to 10', parseInt)
-    .option('-c, --columns <items>', 'returning columns include in the results. Multiple columns are supported by separater ",". Default to all columns', val => val.split(','))
+    .option('-c, --columns <items>', 'returning columns include in the results. Multiple columns are supported by separator ",". Default to all columns', val => val.split(','))
     .option('-g, --geom', 'includes geometry in the returned content')
     .option('-p, --pretty', 'output records with a pretty table format')
     .action(require('./commands/showRecords'));
@@ -30,4 +32,8 @@ program.command('convert-geojson <file>')
     .action(require('./commands/convertGeoJson'));
 
 program.parse(process.argv);
+
+if (program.args.length < 3) {
+    program.help();
+}
 
