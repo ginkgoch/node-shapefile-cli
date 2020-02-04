@@ -78,7 +78,7 @@ function buildIndex(filePath, override) {
         console.log(`[Done] ${path.basename(filePath)} index with ${index.count()} records build complete.`);
     }
     catch (ex) {
-        console.log('[Error]', ex);
+        console.error('[Error]', ex);
         indexFilePaths.filter(f => fs.existsSync(f)).forEach(f => fs.unlinkSync(f));
     } 
     finally {
