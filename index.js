@@ -27,13 +27,18 @@ program.command('show-records <file>')
 
 program.command('convert-geojson <file>')
     .description('Convert shapefile to GeoJson')
-    .option('-c, --columns <items>', 'returning columns include in the results. Multiple columns are supported by separater ",". Default to all columns', val => val.split(','))
+    .option('-c, --columns <items>', 'returning columns include in the results. Multiple columns are supported by separator ",". Default to all columns', val => val.split(','))
     .option('-o, --output <value>', 'output file path. If only directory is specified, the same file name will be used. Default to the same folder of the source Shapefile')
     .action(require('./commands/convertGeoJson'));
 
+program.command('build-index <fileOrDir>')
+    .description('Build index for shapefile')
+    .option('-w, --overwrite', 'Overwrite if index files exist. Default is "false"')
+    .action(require('./commands/buildIndex'));
+
 program.parse(process.argv);
 
-if (program.args.length < 3) {
+if (program.rawArgs.length < 3) {
     program.help();
 }
 
