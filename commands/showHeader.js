@@ -1,21 +1,19 @@
 const _ = require('lodash');
 const table = require('table').table;
-const Shapefile = require('ginkgoch-shapefile-reader').Shapefile;
-const ShapefileType = require('ginkgoch-shapefile-reader').ShapefileType;
+const { Shapefile, ShapefileType } = require('ginkgoch-shapefile');
 
-module.exports = async function(file, cmd) {
+module.exports = function(file, cmd) {
     const shapefile = new Shapefile(file);
     const pretty = cmd.pretty;
-    await shapefile.openWith(async () => {
+    shapefile.openWith(() => {
         let header = _.cloneDeep(shapefile.header());
         header.fileType = _.findKey(ShapefileType, v => v === header.fileType);
         header.fileType = _.capitalize(header.fileType);
         if (pretty) {
-            header.minx = header.envelope.minx;
-            header.miny = header.envelope.miny;
-            header.maxx = header.envelope.maxx;
-            header.maxy = header.envelope.maxy;
-            delete header.envelope;
+            header.minx = header.minx;
+            header.miny = header.miny;
+            header.maxx = header.maxx;
+            header.maxy = header.maxy;
             header = table(_.entries(header));
         } else { 
             header = JSON.stringify(header);

@@ -1,39 +1,54 @@
 const _ = require('lodash');
 const table = require('table').table;
-const Shapefile = require('ginkgoch-shapefile-reader').Shapefile;
+const Shapefile = require('ginkgoch-shapefile').Shapefile;
 const truncateOption = { length: 30 };
 
-module.exports = async function(file, cmd) {
+function getRecordJSON(record, requireGeom) {
+    let recordJSON = record.toJSON();
+    let type = recordJSON.type
+
+    if (!requireGeom) {
+        recordJSON = _.omit(recordJSON, ['geometry', 'envelope', 'type']);
+    }
+
+    if (type) {
+        recordJSON.type = type;
+    }
+
+    return recordJSON;
+}
+
+module.exports = function (file, cmd) {
     const limit = _.isUndefined(cmd.limit) ? 10 : cmd.limit;
     const columns = cmd.columns || 'all';
     const geom = cmd.geom || false;
 
     const shapefile = new Shapefile(file);
-    await shapefile.openWith(async () => {
-        const records = await shapefile.iterator({ fields: columns });
+    shapefile.openWith(() => {
+        const records = shapefile.iterator({ fields: columns });
         let record = undefined;
         let counter = 0;
         let headers = undefined;
         let tableData = undefined;
 
-        while ((record = await records.next()) && !record.done) {
-            record = record.result;
-            if (!geom) {
-                record = _.omit(record, ['geometry', 'envelope']);
-            }
+        while ((record = records.next()) && !records.done) {
+            if (!record.hasValue) continue;
 
+            record = record.value;
             if (cmd.pretty) {
                 if (!headers) {
-                    headers = _.keys(record.properties);
+                    headers = Array.from(record.properties.keys());
                     cmd.geom && headers.push('geom');
-                    tableData = [ headers ];
+                    tableData = [headers];
                 }
 
-                let row = _.values(record.properties);
-                cmd.geom && row.push(_.truncate(JSON.stringify(record.geometry), truncateOption));
+                let recordJSON = getRecordJSON(record, geom);
+                let row = Array.from(record.properties.values());
+                cmd.geom && row.push(_.truncate(JSON.stringify(recordJSON.geometry), truncateOption));
                 tableData.push(row);
             } else {
-                console.log(JSON.stringify(record));
+                let recordJSON = getRecordJSON(record, geom);
+                console.log(JSON.stringify(recordJSON));
                 console.log();
             }
             counter++;
@@ -47,7 +62,7 @@ module.exports = async function(file, cmd) {
             console.log(table(tableData));
         }
 
-        const count = await shapefile.count();
+        const count = shapefile.count();
         if (count > counter) {
             console.log(`Reading complete. ${counter}/${count} record(s)`);
         }
