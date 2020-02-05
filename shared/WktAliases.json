@@ -1,0 +1,4 @@
+{
+    "EPSG:4326": ["WGS84"],
+    "SR-ORG:6627": ["Google", "EPSG:900913", "Google Mercator", "EPSG:3857", "EPSG:102113"]
+}

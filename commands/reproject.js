@@ -2,13 +2,11 @@ const fs = require('fs');
 const path = require('path');
 const _ = require('lodash');
 const IOUtils = require('../shared/IOUtils');
-const srs = require('srs');
+const SrsUtils = require('../shared/SrsUtils');
 
 const { ShapefileFeatureSource, Srs, ShapefileType, RTRecordType, RTIndex } = require('ginkgoch-map').default.all;
 
 module.exports = async (file, cmd) => {
-
-
     if (!fs.existsSync(file)) {
         console.error('[Error]', `${path.basename(file)} doesn't exist`);
     }
@@ -45,9 +43,6 @@ module.exports = async (file, cmd) => {
     const recordCount = await source.count();
     const pageSize = RTIndex.recommendPageSize(recordCount);
 
-    const prjFilePath = IOUtils.changeExtname(options.output, '.prj');
-    console.log(source.projection.to);
-
     const idxFilePath = IOUtils.changeExtname(options.output, '.idx');
     RTIndex.create(idxFilePath, recordType, { pageSize });
     const index = new RTIndex(idxFilePath, 'rs+');
@@ -66,6 +61,15 @@ module.exports = async (file, cmd) => {
             i++;
 
             process.stdout.write(`[Building] - ${i}/${featureCount}\r`);
+        }
+
+        process.stdout.write(`[Building] - Fetching projection info for ${options.outputSrs}\r`);
+        let wkt = await SrsUtils.getWKT(options.outputSrs);
+        if (wkt !== undefined) {
+            let prjFilePath = IOUtils.changeExtname(options.output, '.prj');
+            fs.writeFileSync(prjFilePath, wkt);
+        } else {
+            console.warn(`[Warning] - Fetching projection info for ${options.outputSrs} failed`);
         }
 
         console.log(`[Done] ${path.basename(file)} re-projected with ${index.count()} records complete`);

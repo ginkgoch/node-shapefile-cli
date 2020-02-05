@@ -17,6 +17,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.19.2",
     "commander": "^2.17.1",
     "ginkgoch-map": "^1.8.12",
     "lodash": "^4.17.10",
@@ -31,8 +32,5 @@
   },
   "devDependencies": {
     "jest": "^23.5.0"
-  },
-  "jest": {
-    "testEnvironment": "node"
   }
 }

@@ -8,7 +8,7 @@ module.exports = class IOUtils {
     }
 
     static cleanShapefile(filePath) {
-        ['.shp', '.shx', '.dbf', '.idx', '.ids']
+        ['.shp', '.shx', '.dbf', '.idx', '.ids', '.prj']
             .map(ext => IOUtils.changeExtname(filePath, ext))
             .filter(f => fs.existsSync(f))
             .forEach(f => fs.unlinkSync(f));
