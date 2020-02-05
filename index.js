@@ -33,15 +33,15 @@ program.command('convert-geojson <file>')
 
 program.command('build-index <fileOrDir>')
     .description('Build index for shapefile')
-    .option('-w, --overwrite', 'Overwrite if index files exist. Default is "false"')
+    .option('-w, --overwrite', 'overwrite if index files exist. Default is "false"')
     .action(require('./commands/buildIndex'));
 
 program.command('reproject <file>')
     .description('Re-project shapefile to a specific SRS')
     .option('--outputSrs <outputSrs>', '[Required] The target SRS. It is required')
-    .option('--sourceSrs <sourceSrs>', 'The source SRS. If .prj file doesn\'t exist, this option will be applied as source SRS')
-    .option('-o, --output <output>', 'The output shapefile path. Default is the source file name with "_[targetSRS]" suffix')
-    .option('-w, --overwrite', 'Overwrite if index files exist. Default is "false"')
+    .option('--sourceSrs <sourceSrs>', 'the source SRS. If .prj file doesn\'t exist, this option will be applied as source SRS')
+    .option('-o, --output <output>', 'the output shapefile path. Default is the source file name with "_[targetSRS]" suffix')
+    .option('-w, --overwrite', 'overwrite if index files exist. Default is "false"')
     .action(require('./commands/reproject'));
 
 program.parse(process.argv);
