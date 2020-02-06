@@ -11,7 +11,7 @@ module.exports = function(file, cmd) {
             fields = fields.map(f => { 
                 let tmp = _.values(f);
                 if(tmp.length == 3) {
-                    tmp.push(NaN);
+                    tmp.push("");
                 } 
                 return tmp;
             });
