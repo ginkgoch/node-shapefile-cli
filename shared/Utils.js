@@ -48,6 +48,8 @@ module.exports = class Utils {
             }
         }
 
-        return features.toJSON();
+        const featureJSON = features.toJSON();
+        featureJSON.features.forEach(f => delete f.geometry);
+        return featureJSON;
     }
 }

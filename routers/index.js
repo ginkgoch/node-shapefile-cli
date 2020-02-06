@@ -60,7 +60,7 @@ module.exports = file => {
  * @param {minx: number, maxx: number, miny: number, maxy: number} envelope 
  */
 async function setProperProjection(source) {
-    if (source.projection.from === undefined) {
+    if (source.projection.from === undefined || source.projection.from.projection === undefined) {
         let envelope = await source.envelope();
         if(Math.abs(envelope.maxx - envelope.minx) <= 360 && Math.abs(envelope.maxy - envelope.miny)) {
             source.projection.from = new Srs('WGS84');
