@@ -1,11 +1,19 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'leaflet/dist/leaflet.css';
+import './content.css';
+
+import axios from "axios";
+import L from 'leaflet';
+import Vue from 'vue/dist/vue.esm';
+
 let { name, filePath, header, features, fields, totalCount } = state;
 
-let getTableData = function(fields, features) {
+let getTableData = function (fields, features) {
     let tableData = [];
     let fieldNames = fields.map(f => f.name);
     tableData.push(fieldNames);
 
-    for(let feature of features.features) {
+    for (let feature of features.features) {
         let rowData = [];
         fieldNames.forEach(n => {
             let v = feature.properties[n] || '';
@@ -22,10 +30,10 @@ let data = { name, general: { filePath, ...header, totalCount }, properties: get
 let app = new Vue({
     el: '.root',
     data,
-    mounted: async function() {
+    mounted: async function () {
         let mapContainer = document.querySelector('#mapContainer');
         let response = await axios.get(`/viewport?width=${mapContainer.clientWidth}&height=${mapContainer.clientHeight}`);
-        let {lng, lat, zoom, features} = response.data;
+        let { lng, lat, zoom, features } = response.data;
 
         let map = L.map('mapContainer').setView([lat, lng], zoom);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -38,7 +46,7 @@ let app = new Vue({
             "opacity": 0.65
         };
 
-        let onPopup = function(layer) {
+        let onPopup = function (layer) {
             let properties = layer.feature.properties;
             let content = '<div class="popup-container"><table class="table table-sm table-striped">';
             for (let key in properties) {

@@ -1,4 +1,5 @@
 const axios = require('axios').default;
+const wktCaches = require('./WktCaches');
 //https://spatialreference.org/ref/epsg/4326/ogcwkt/
 axios.defaults.baseURL = 'https://spatialreference.org';
 
@@ -6,6 +7,10 @@ module.exports = class SrsUtils {
     static async getWKT(code) {    
         code = this._getMappedID(code);
         if(code.includes(':')) {
+            if (code in wktCaches) {
+                return wktCaches[code];
+            }
+
             let [type, id] = code.split(':');
             try {
                 let url = `/ref/${type.toLowerCase()}/${id}/ogcwkt/`;

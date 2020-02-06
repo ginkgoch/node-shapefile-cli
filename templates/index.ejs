@@ -5,10 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Ginkgoch - Shapefile</title>
-
-    <link rel="stylesheet" href="./assets/bootstrap.min.css" >
-    <link rel="stylesheet" href="./assets/leaflet.css" >
-    <link rel="stylesheet" href="./assets/content.css" >
 </head>
 <body>
     <script>
@@ -37,7 +33,7 @@
         <div class="row">
             <div class="map-table table-scroll">
                 <div>
-                    Fetched the top <span class="text-primary">{{ properties.length - 1 }}</span> records of <span class="text-primary">{{ totalCount }}</span class="text-primary">
+                    Fetched the top <span class="text-primary">{{ properties.length - 1 }}</span> records of <span class="text-primary">{{ general.totalCount }}</span class="text-primary">
                 </div>
                 <table class="table table-striped">
                     <thead>
@@ -54,11 +50,6 @@
             </div>
         </div>
     </div>
-
-    <script src="./assets/lodash.min.js"></script>
-    <script src="./assets/vue.min.js"></script>
-    <script src="./assets/leaflet.js"></script>
-    <script src="./assets/axios.min.js"></script>
-    <script src="./assets/content.js"></script>
+    <script src="./dist/bundle.js"></script>
 </body>
 </html>

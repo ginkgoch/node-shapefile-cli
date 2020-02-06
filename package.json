@@ -1,43 +1,54 @@
 {
-  "name": "ginkgoch-shapefile-cli",
-  "version": "1.2.0",
-  "description": "This is command line tool for inspecting shapefiles.",
-  "main": "index.js",
-  "scripts": {
-    "test": "./node_modules/.bin/jest",
-    "show-header": "node index.js show-header ./tests/data/USStates.shp -p",
-    "show-fields": "node index.js show-fields ./tests/data/USStates.shp -p",
-    "show-records": "node index.js show-records ./tests/data/USStates.shp -p -g -l 10 -c STATE_NAME,RECID",
-    "convert-geojson": "node index.js convert-geojson ./tests/data/USStates.shp"
-  },
-  "author": {
-    "name": "Ginkgoch",
-    "email": "ginkgoch@outlook.com",
-    "url": "https://github.com/ginkgoch"
-  },
-  "license": "MIT",
-  "dependencies": {
-    "@koa/router": "^8.0.6",
-    "axios": "^0.19.2",
-    "bootstrap": "^4.4.1",
-    "commander": "^2.17.1",
-    "ginkgoch-map": "^1.8.14",
-    "koa": "^2.11.0",
-    "koa-ejs": "^4.3.0",
-    "koa-static": "^5.0.0",
-    "leaflet": "^1.6.0",
-    "lodash": "^4.17.10",
-    "table": "^4.0.3",
-    "vue": "^2.6.11"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ginkgoch/node-shapefile-cli"
-  },
-  "bin": {
-    "shapefile-cli": "./index.js"
-  },
-  "devDependencies": {
-    "jest": "^23.5.0"
-  }
+    "name": "ginkgoch-shapefile-cli",
+    "version": "1.2.0",
+    "description": "This is command line tool for inspecting shapefiles.",
+    "main": "index.js",
+    "scripts": {
+        "build": "./node_modules/.bin/webpack",
+        "serve": "node index.js serve ./tests/data/USStates.shp",
+        "test": "./node_modules/.bin/jest",
+        "show-header": "node index.js show-header ./tests/data/USStates.shp -p",
+        "show-fields": "node index.js show-fields ./tests/data/USStates.shp -p",
+        "show-records": "node index.js show-records ./tests/data/USStates.shp -p -g -l 10 -c STATE_NAME,RECID",
+        "convert-geojson": "node index.js convert-geojson ./tests/data/USStates.shp"
+    },
+    "author": {
+        "name": "Ginkgoch",
+        "email": "ginkgoch@outlook.com",
+        "url": "https://github.com/ginkgoch"
+    },
+    "license": "MIT",
+    "dependencies": {
+        "@koa/router": "^8.0.6",
+        "axios": "^0.19.2",
+        "bootstrap": "^4.4.1",
+        "commander": "^2.17.1",
+        "core-js": "3",
+        "ginkgoch-map": "^1.8.14",
+        "koa": "^2.11.0",
+        "koa-ejs": "^4.3.0",
+        "koa-static": "^5.0.0",
+        "leaflet": "^1.6.0",
+        "lodash": "^4.17.10",
+        "table": "^4.0.3",
+        "vue": "^2.6.11"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ginkgoch/node-shapefile-cli"
+    },
+    "bin": {
+        "shapefile-cli": "./index.js"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.2.2",
+        "@babel/preset-env": "^7.3.1",
+        "babel-loader": "^8.0.5",
+        "css-loader": "^3.4.2",
+        "jest": "^23.5.0",
+        "style-loader": "^1.1.3",
+        "url-loader": "^3.0.0",
+        "webpack": "^4.29.0",
+        "webpack-cli": "^3.2.1"
+    }
 }
