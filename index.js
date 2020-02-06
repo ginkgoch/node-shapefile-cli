@@ -44,6 +44,10 @@ program.command('reproject <file>')
     .option('-w, --overwrite', 'overwrite if index files exist. Default is "false"')
     .action(require('./commands/reproject'));
 
+program.command('serve <file>')
+    .description('Launch a server for browsing shapefile with UI')
+    .action(require('./commands/serve'));
+
 program.parse(process.argv);
 
 if (program.rawArgs.length < 3) {

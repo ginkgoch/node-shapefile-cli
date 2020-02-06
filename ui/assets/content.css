@@ -1,0 +1,13 @@
+.title {
+    margin-top: 1rem;
+    margin-bottom: .5rem;
+}
+
+.map-container {
+    height: 480px;
+}
+
+.table-scroll {
+    overflow-x: auto;
+    width: 100%;
+}

@@ -1,12 +1,13 @@
 const _ = require('lodash');
 const table = require('table').table;
 const Shapefile = require('ginkgoch-shapefile').Shapefile;
+const Utils = require('../shared/Utils');
 
 module.exports = function(file, cmd) {
     const shapefile = new Shapefile(file);
     const pretty = cmd.pretty;
     shapefile.openWith(() => {
-        let fields = _.cloneDeep(shapefile.fields(true));
+        let fields = Utils.getFields(shapefile);
         if (pretty) {
             fields = fields.map(f => { 
                 let tmp = _.values(f);
