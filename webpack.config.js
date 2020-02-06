@@ -2,10 +2,10 @@ const path = require('path');
 
 module.exports = {
     mode: 'production',
-    entry: path.join(__dirname, 'ui', 'assets', 'content'),
+    entry: path.join(__dirname, 'client', 'content'),
     watch: false,
     output: {
-        path: path.join(__dirname, 'ui', 'dist'),
+        path: path.join(__dirname, 'dist', 'assets'),
         filename: "bundle.js",
     },
     module: {

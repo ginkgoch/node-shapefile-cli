@@ -21,7 +21,7 @@ module.exports = (file, cmd) => {
     });
 
     let router = getRouter(file);
-    server.use(static('./ui'));
+    server.use(static('./dist'));
     server.use(router.routes()).use(router.allowedMethods());
     server.listen(port, () => {
         console.log(`Server is hosted on http://localhost:${port}.\nPress CTRL+C to quit.`)
