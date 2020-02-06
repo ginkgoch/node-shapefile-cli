@@ -45,7 +45,8 @@ program.command('reproject <file>')
     .action(require('./commands/reproject'));
 
 program.command('serve <file>')
-    .description('Launch a server for browsing shapefile with UI')
+    .description('Launch a server for exploring shapefile on browser')
+    .option('-p, --port <port>', 'the server port exposed to browse, default port is 3000')
     .action(require('./commands/serve'));
 
 program.parse(process.argv);
