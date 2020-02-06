@@ -3,6 +3,7 @@ const static = require('koa-static');
 const path = require('path');
 const fs = require('fs');
 const ejs = require('koa-ejs');
+const compress = require('koa-compress');
 const getRouter = require('../routers');
 
 module.exports = (file, cmd) => {
@@ -21,6 +22,13 @@ module.exports = (file, cmd) => {
     });
 
     let router = getRouter(file);
+    server.use(compress({
+        filter: function (content_type) {
+            return /json/i.test(content_type)
+        },
+        threshold: 2048,
+        flush: require('zlib').Z_SYNC_FLUSH
+      }))
     server.use(static('./dist'));
     server.use(router.routes()).use(router.allowedMethods());
     server.listen(port, () => {

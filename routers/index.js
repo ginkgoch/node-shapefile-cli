@@ -18,7 +18,7 @@ module.exports = file => {
             overview.features = Utils.getFeatureCollectionJSON(shapefile, 20);
             overview.fields = Utils.getFields(shapefile);
             overview.totalCount = Utils.getTotalCount(shapefile);
-        
+
             await ctx.render('index', { overview });
         }
         finally {
@@ -39,13 +39,33 @@ module.exports = file => {
             const scale = GeoUtils.scale(envelope, Unit.degrees, { width, height });
             const zoom = GeoUtils.scaleLevel(scale) - 1;
 
+            const [lng, lat] = [.5 * (envelope.minx + envelope.maxx), .5 * (envelope.miny + envelope.maxy)];
+            ctx.type = 'json';
+            ctx.body = { lng, lat, zoom };
+        }
+        finally {
+            await source.close();
+        }
+    });
+
+    router.get('/features', async ctx => {
+        let { width, height } = ctx.query;
+
+        const source = new ShapefileFeatureSource(file);
+        await source.open();
+
+        try {
+            await setProperProjection(source);
             const features = await source.features();
+
+            let envelope = await source.envelope();
+            const scale = GeoUtils.scale(envelope, Unit.degrees, { width, height });
+
             features.forEach(f => f.geometry = ViewportUtils.compressGeometry(f.geometry, 'WGS84', scale, 1));
             const featureCollection = new FeatureCollection(features).toJSON();
 
-            const [ lng, lat ] = [.5 * (envelope.minx + envelope.maxx), .5 * (envelope.miny + envelope.maxy)];
             ctx.type = 'json';
-            ctx.body = { lng, lat, zoom, features: featureCollection };
+            ctx.body = { features: featureCollection };
         }
         finally {
             await source.close();
@@ -62,7 +82,7 @@ module.exports = file => {
 async function setProperProjection(source) {
     if (source.projection.from === undefined || source.projection.from.projection === undefined) {
         let envelope = await source.envelope();
-        if(Math.abs(envelope.maxx - envelope.minx) <= 360 && Math.abs(envelope.maxy - envelope.miny)) {
+        if (Math.abs(envelope.maxx - envelope.minx) <= 360 && Math.abs(envelope.maxy - envelope.miny)) {
             source.projection.from = new Srs('WGS84');
         } else {
             source.projection.from = new Srs('EPSG:900913');

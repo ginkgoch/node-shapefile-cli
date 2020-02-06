@@ -27,19 +27,22 @@ let getTableData = function (fields, features) {
 };
 
 let data = { name, general: { filePath, ...header, totalCount }, properties: getTableData(fields, features) };
-let app = new Vue({
+new Vue({
     el: '.root',
     data,
     mounted: async function () {
         let mapContainer = document.querySelector('#mapContainer');
         let response = await axios.get(`/viewport?width=${mapContainer.clientWidth}&height=${mapContainer.clientHeight}`);
-        let { lng, lat, zoom, features } = response.data;
+        let { lng, lat, zoom } = response.data;
 
         let map = L.map('mapContainer').setView([lat, lng], zoom);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
+        response = await axios.get(`/features?width=${mapContainer.clientWidth}&height=${mapContainer.clientHeight}`);
+        let { features } = response.data;
+        
         let style = {
             "color": "#ff7800",
             "weight": 1,
