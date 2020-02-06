@@ -1,6 +1,6 @@
 const path = require('path');
 const Router = require('@koa/router');
-const { ShapefileFeatureSource, GeoUtils, Unit, Srs } = require('ginkgoch-map').default.all;
+const { ShapefileFeatureSource, GeoUtils, Unit, Srs, ViewportUtils, FeatureCollection } = require('ginkgoch-map').default.all;
 const Utils = require('../shared/Utils');
 
 module.exports = file => {
@@ -18,7 +18,6 @@ module.exports = file => {
             overview.features = Utils.getFeatureCollectionJSON(shapefile, 20);
             overview.fields = Utils.getFields(shapefile);
             overview.totalCount = Utils.getTotalCount(shapefile);
-            overview.viewport = Utils.getViewport(shapefile);
         
             await ctx.render('index', { overview });
         }
@@ -38,10 +37,15 @@ module.exports = file => {
 
             let envelope = await source.envelope();
             const scale = GeoUtils.scale(envelope, Unit.degrees, { width, height });
-            const zoom = GeoUtils.scaleLevel(scale);
+            const zoom = GeoUtils.scaleLevel(scale) - 1;
+
+            const features = await source.features();
+            features.forEach(f => f.geometry = ViewportUtils.compressGeometry(f.geometry, 'WGS84', scale, 1));
+            const featureCollection = new FeatureCollection(features).toJSON();
+
             const [ lng, lat ] = [.5 * (envelope.minx + envelope.maxx), .5 * (envelope.miny + envelope.maxy)];
             ctx.type = 'json';
-            ctx.body = { lng, lat, zoom };
+            ctx.body = { lng, lat, zoom, features: featureCollection };
         }
         finally {
             await source.close();

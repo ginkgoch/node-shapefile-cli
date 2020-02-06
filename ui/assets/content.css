@@ -11,3 +11,8 @@
     overflow-x: auto;
     width: 100%;
 }
+
+.popup-container {
+    max-height: 300px;
+    overflow-y: auto;
+}

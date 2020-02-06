@@ -21,7 +21,7 @@
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
     "commander": "^2.17.1",
-    "ginkgoch-map": "^1.8.12",
+    "ginkgoch-map": "^1.8.14",
     "koa": "^2.11.0",
     "koa-ejs": "^4.3.0",
     "koa-static": "^5.0.0",
