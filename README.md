@@ -29,6 +29,7 @@ show-records [options] <file>      Output shapefile records information
 convert-geojson [options] <file>   Convert shapefile to GeoJson
 build-index [options] <fileOrDir>  Build index for shapefile
 reproject [options] <file>         Re-project shapefile to a specific SRS
+serve [options] <file>             Launch a server for exploring shapefile on browser
 ```
 
 ## Show Header
@@ -214,5 +215,22 @@ Options:
 -h, --help               output usage information
 ```
 
+## Launch a server
+Launch a server for exploring shapefile on browser.
+```bash
+shapefile-cli reproject --help
+```
+
+Usage: `serve [options] <file>`
+
+Options:
+```bash
+-p, --port <port>  the server port exposed to browse, default port is 3000
+-h, --help         output usage information
+```
+
+Screenshot:
+![shapefile-cli-serve](./docs/shapefile-cli-serve.png)
+
 ## Issues
-Contact [ginkgoch@outlook.com](mailto:ginkgoch@outlook.com) or [sumbit an issue](https://github.com/ginkgoch/node-shapefile-cli/issues).
+Contact [ginkgoch@outlook.com](mailto:ginkgoch@outlook.com) or [submit an issue](https://github.com/ginkgoch/node-shapefile-cli/issues).
