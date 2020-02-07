@@ -29,7 +29,7 @@ module.exports = (file, cmd) => {
         threshold: 2048,
         flush: require('zlib').Z_SYNC_FLUSH
       }))
-    server.use(static('./dist'));
+    server.use(static(path.resolve(__dirname, '../dist')));
     server.use(router.routes()).use(router.allowedMethods());
     server.listen(port, () => {
         console.log(`Server is hosted on http://localhost:${port}.\nPress CTRL+C to quit.`)
