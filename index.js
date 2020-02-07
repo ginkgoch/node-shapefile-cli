@@ -27,13 +27,31 @@ program.command('show-records <file>')
 
 program.command('convert-geojson <file>')
     .description('Convert shapefile to GeoJson')
-    .option('-c, --columns <items>', 'returning columns include in the results. Multiple columns are supported by separater ",". Default to all columns', val => val.split(','))
+    .option('-c, --columns <items>', 'returning columns include in the results. Multiple columns are supported by separator ",". Default to all columns', val => val.split(','))
     .option('-o, --output <value>', 'output file path. If only directory is specified, the same file name will be used. Default to the same folder of the source Shapefile')
     .action(require('./commands/convertGeoJson'));
 
+program.command('build-index <fileOrDir>')
+    .description('Build index for shapefile')
+    .option('-w, --overwrite', 'overwrite if index files exist. Default is "false"')
+    .action(require('./commands/buildIndex'));
+
+program.command('reproject <file>')
+    .description('Re-project shapefile to a specific SRS')
+    .option('--outputSrs <outputSrs>', '[Required] The target SRS. It is required')
+    .option('--sourceSrs <sourceSrs>', 'the source SRS. If .prj file doesn\'t exist, this option will be applied as source SRS')
+    .option('-o, --output <output>', 'the output shapefile path. Default is the source file name with "_[targetSRS]" suffix')
+    .option('-w, --overwrite', 'overwrite if index files exist. Default is "false"')
+    .action(require('./commands/reproject'));
+
+program.command('serve <file>')
+    .description('Launch a server for exploring shapefile on browser')
+    .option('-p, --port <port>', 'the server port exposed to browse, default port is 3000')
+    .action(require('./commands/serve'));
+
 program.parse(process.argv);
 
-if (program.args.length < 3) {
+if (program.rawArgs.length < 3) {
     program.help();
 }
 

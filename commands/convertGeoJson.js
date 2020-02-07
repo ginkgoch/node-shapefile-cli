@@ -2,7 +2,7 @@ const fs = require('fs');
 const _ = require('lodash');
 const Shapefile = require('ginkgoch-shapefile').Shapefile;
 
-module.exports = async function(file, cmd) {
+module.exports = function(file, cmd) {
     const columns = cmd.columns || 'all';
 
     const shapefile = new Shapefile(file);
@@ -13,14 +13,14 @@ module.exports = async function(file, cmd) {
         outputPath = outputPath.slice(0, outputPath.lastIndexOf('.')) + '.json';
     }
 
-    await shapefile.openWith(async () => {
-        const records = await shapefile.iterator({ fields: columns });
+    shapefile.openWith(() => {
+        const records = shapefile.iterator({ fields: columns });
         let record = undefined;
 
         const featureCollection = { type: 'FeatureCollection' };
         const features = [];
-        while ((record = await records.next()) && !record.done) {
-            record = record.result;
+        while ((record = records.next()) && !records.done) {
+            record = record.value;
             features.push(record);
         }
 

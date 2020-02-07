@@ -23,10 +23,13 @@ Options:
 ```
 Commands:
 ```terminal
-show-header [options] <file>   output a specified shapefile header information
-show-fields [options] <file>   output a specified shapefile fields information
-show-records [options] <file>  output a specified shapefile records information
-convert-geojson [options] <file>  Convert shapefile to GeoJson
+show-header [options] <file>       Output shapefile header information
+show-fields [options] <file>       Output shapefile fields information
+show-records [options] <file>      Output shapefile records information
+convert-geojson [options] <file>   Convert shapefile to GeoJson
+build-index [options] <fileOrDir>  Build index for shapefile
+reproject [options] <file>         Re-project shapefile to a specific SRS
+serve [options] <file>             Launch a server for exploring shapefile on browser
 ```
 
 ## Show Header
@@ -160,7 +163,7 @@ Tips:
 ```
 
 ## Convert to GeoJson
-Show records help
+Convert shapefile to GeoJSON format help
 ```terminal
 shapefile-cli convert-geojson --help
 ```
@@ -181,5 +184,53 @@ shapefile-cli convert-geojson ./tests/data/USStates.shp
 Conversion complete. New file is saved at ./tests/data/USStates.json.
 ```
 
+## Build index
+Build spatial index help
+```bash
+shapefile-cli build-index --help
+```
+
+Usage: `build-index [options] <fileOrDir>`
+
+Options:
+```bash
+-w, --overwrite  Overwrite if index files exist. Default is "false"
+-h, --help       output usage information
+```
+
+## Re-projection
+Re-project from current coordinate system to another help
+```bash
+shapefile-cli reproject --help
+```
+
+Usage: `reproject [options] <file>`
+
+Options:
+```bash
+--outputSrs <outputSrs>  [Required] The target SRS. It is required
+--sourceSrs <sourceSrs>  the source SRS. If .prj file doesn't exist, this option will be applied as source SRS
+-o, --output <output>    the output shapefile path. Default is the source file name with "_[targetSRS]" suffix
+-w, --overwrite          overwrite if index files exist. Default is "false"
+-h, --help               output usage information
+```
+
+## Launch a server
+Launch a server for exploring shapefile on browser.
+```bash
+shapefile-cli reproject --help
+```
+
+Usage: `serve [options] <file>`
+
+Options:
+```bash
+-p, --port <port>  the server port exposed to browse, default port is 3000
+-h, --help         output usage information
+```
+
+Screenshot:
+![shapefile-cli-serve](./docs/shapefile-cli-serve.png)
+
 ## Issues
-Contact [ginkgoch@outlook.com](mailto:ginkgoch@outlook.com) or [sumbit an issue](https://github.com/ginkgoch/node-shapefile-cli/issues).
+Contact [ginkgoch@outlook.com](mailto:ginkgoch@outlook.com) or [submit an issue](https://github.com/ginkgoch/node-shapefile-cli/issues).
