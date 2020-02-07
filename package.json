@@ -4,7 +4,7 @@
     "description": "This is command line tool for inspecting shapefiles.",
     "main": "index.js",
     "scripts": {
-        "build": "./node_modules/.bin/webpack --watch",
+        "build": "./node_modules/.bin/webpack",
         "dev-build": "./node_modules/.bin/webpack --watch",
         "serve": "node index.js serve ./tests/data/USStates.shp",
         "test": "./node_modules/.bin/jest",
