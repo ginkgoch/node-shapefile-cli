@@ -56,12 +56,12 @@ module.exports = file => {
 
         try {
             await setProperProjection(source);
-            const features = await source.features();
+            let features = await source.features();
 
             let envelope = await source.envelope();
             const scale = GeoUtils.scale(envelope, Unit.degrees, { width, height });
 
-            features.forEach(f => f.geometry = ViewportUtils.compressGeometry(f.geometry, 'WGS84', scale, 1));
+            features = ViewportUtils.compressFeatures(features, 'WGS84', scale, 2);
             const featureCollection = new FeatureCollection(features).toJSON();
 
             ctx.type = 'json';

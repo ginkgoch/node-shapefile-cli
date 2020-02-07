@@ -46,7 +46,8 @@ new Vue({
         let style = {
             "color": "#ff7800",
             "weight": 1,
-            "opacity": 0.65
+            "opacity": 0.65,
+            "radius": 4
         };
 
         let onPopup = function (layer) {
@@ -59,6 +60,10 @@ new Vue({
             return content;
         };
 
-        L.geoJSON(features, { style }).bindPopup(onPopup).addTo(map);
+        let pointToLayer = function (feature, latlng) {
+			return L.circleMarker(latlng, style);
+		} 
+
+        L.geoJSON(features, { style, pointToLayer }).bindPopup(onPopup).addTo(map);
     }
 });

@@ -4,7 +4,7 @@
     "description": "This is command line tool for inspecting shapefiles.",
     "main": "index.js",
     "scripts": {
-        "build": "./node_modules/.bin/webpack",
+        "build": "./node_modules/.bin/webpack --watch",
         "serve": "node index.js serve ./tests/data/USStates.shp",
         "test": "./node_modules/.bin/jest",
         "show-header": "node index.js show-header ./tests/data/USStates.shp -p",
@@ -24,7 +24,7 @@
         "bootstrap": "^4.4.1",
         "commander": "^2.17.1",
         "core-js": "3",
-        "ginkgoch-map": "^1.8.14",
+        "ginkgoch-map": "^1.8.15",
         "koa": "^2.11.0",
         "koa-compress": "^3.0.0",
         "koa-ejs": "^4.3.0",

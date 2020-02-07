@@ -2711,10 +2711,10 @@ ginkgoch-geom@^1.8.0:
     jsts "^2.0.6"
     lodash "^4.17.15"
 
-ginkgoch-map@^1.8.14:
-  version "1.8.14"
-  resolved "https://registry.yarnpkg.com/ginkgoch-map/-/ginkgoch-map-1.8.14.tgz#aef5b7c4eebce3be15bdca276f71f30a1073fc40"
-  integrity sha512-o5dP3x42P3RW9M+b1n/axWgfYJBOLkkemjGVoL2uqlRHN9o9dGunGrmJZasNtXGXKb1t4SZ2p1QVQKBoEkNfIQ==
+ginkgoch-map@^1.8.15:
+  version "1.8.15"
+  resolved "https://registry.yarnpkg.com/ginkgoch-map/-/ginkgoch-map-1.8.15.tgz#0bbcb44ad4853e119ee3fe628d9e7132a6beb4c1"
+  integrity sha512-QWEhvlEEwvrEdG2J5hFZlEFlM3KAB3CL9bidapqRml4gXTWpTb7EqLYi0qtifxaLdXnsKiH7qRpAkW4f6WDPdQ==
   dependencies:
     "@types/lodash" "^4.14.136"
     "@types/proj4" "^2.5.0"
