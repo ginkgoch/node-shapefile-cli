@@ -5,6 +5,7 @@
     "main": "index.js",
     "scripts": {
         "build": "./node_modules/.bin/webpack --watch",
+        "dev-build": "./node_modules/.bin/webpack --watch",
         "serve": "node index.js serve ./tests/data/USStates.shp",
         "test": "./node_modules/.bin/jest",
         "show-header": "node index.js show-header ./tests/data/USStates.shp -p",
