@@ -16,3 +16,12 @@
     max-height: 300px;
     overflow-y: auto;
 }
+
+.general-info th {
+    width: 140px;
+}
+
+.general-info td {
+    text-overflow: ellipsis;
+    overflow: hidden;
+}

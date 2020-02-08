@@ -19,11 +19,11 @@
             </div>
             <div class="col-md-6 col-sm-12">
                 <div class="map-info bg-light">
-                    <table class="table table-striped">
+                    <table class="table table-striped" style="table-layout: fixed;">
                         <tbody>
-                            <tr v-for="(value, key) in general">
-                                <th>{{ key }}</td>
-                                <td>{{ value }}</td>
+                            <tr v-for="(value, key) in general" class="general-info">
+                                <th scope="row">{{ key }}</td>
+                                <td class="field-value" :title="value">{{ value }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -38,7 +38,7 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th v-for="item in properties[0]">{{ item }}</th>
+                            <th v-for="item in properties[0]" scope="col">{{ item }}</th>
                         </tr>
                     </thead>
                     <tbody>
