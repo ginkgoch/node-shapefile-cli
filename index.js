@@ -44,8 +44,8 @@ program.command('reproject <file>')
     .option('-w, --overwrite', 'overwrite if index files exist. Default is "false"')
     .action(require('./commands/reproject'));
 
-program.command('serve <file>')
-    .description('Launch a server for exploring shapefile on browser')
+program.command('serve <fileOrDir>')
+    .description('Launch a server for exploring shapefile(s) on browser')
     .option('-p, --port <port>', 'the server port exposed to browse, default port is 3000')
     .action(require('./commands/serve'));
 
