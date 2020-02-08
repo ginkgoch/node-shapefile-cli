@@ -27,6 +27,8 @@ new Vue({
     el: '.root',
     data,
     mounted: async function () {
+        document.querySelector('.root').setAttribute('style', 'display: block;');
+
         const content = document.createElement('div');
         content.setAttribute('class', 'list-group list-group-flush');
         filePaths.forEach(f => {
