@@ -29,7 +29,7 @@ show-records [options] <file>      Output shapefile records information
 convert-geojson [options] <file>   Convert shapefile to GeoJson
 build-index [options] <fileOrDir>  Build index for shapefile
 reproject [options] <file>         Re-project shapefile to a specific SRS
-serve [options] <file>             Launch a server for exploring shapefile on browser
+serve [options] <fileOrDir>             Launch a server for exploring shapefile(s) on browser
 ```
 
 ## Show Header
@@ -221,7 +221,7 @@ Launch a server for exploring shapefile on browser.
 shapefile-cli reproject --help
 ```
 
-Usage: `serve [options] <file>`
+Usage: `serve [options] <fileOrDir>`
 
 Options:
 ```bash
@@ -229,7 +229,7 @@ Options:
 -h, --help         output usage information
 ```
 
-Screenshot:
+Take a look at a screenshot of serving a specific directory:
 ![shapefile-cli-serve](./docs/shapefile-cli-serve.png)
 
 ## Issues

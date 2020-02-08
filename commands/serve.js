@@ -3,13 +3,14 @@ const static = require('koa-static');
 const path = require('path');
 const fs = require('fs');
 const ejs = require('koa-ejs');
+const bodyParser = require('koa-bodyparser');
 const compress = require('koa-compress');
 const getRouter = require('../routers');
 
 module.exports = (file, cmd) => {
     let port = cmd.port || 3000;
     if (!fs.existsSync(file)) {
-        console.error('[Error]', `File ${path.basename(file)} doesn't exist, please set a valid shapefile path and try again.`);
+        console.error('[Error]', `${path.basename(file)} doesn't exist, please set a valid shapefile path or folder and try again.`);
     }
     
     const server = new Koa();
@@ -22,6 +23,11 @@ module.exports = (file, cmd) => {
     });
 
     let router = getRouter(file);
+    if (router === null) {
+        return;
+    }
+
+    server.use(bodyParser());
     server.use(compress({
         filter: function (content_type) {
             return /json/i.test(content_type)
@@ -29,7 +35,7 @@ module.exports = (file, cmd) => {
         threshold: 2048,
         flush: require('zlib').Z_SYNC_FLUSH
       }))
-    server.use(static('./dist'));
+    server.use(static(path.resolve(__dirname, '../dist')));
     server.use(router.routes()).use(router.allowedMethods());
     server.listen(port, () => {
         console.log(`Server is hosted on http://localhost:${port}.\nPress CTRL+C to quit.`)

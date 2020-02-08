@@ -1,12 +1,14 @@
 {
     "cSpell.words": [
         "EPSG",
+        "Extnames",
         "geojson",
         "ginkgoch",
         "latlng",
         "maxx",
         "miny",
         "reproject",
-        "shapefile"
+        "shapefile",
+        "shapefiles"
     ]
 }
