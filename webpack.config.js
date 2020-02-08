@@ -1,4 +1,5 @@
 const path = require('path');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     mode: 'production',
@@ -8,6 +9,14 @@ module.exports = {
         path: path.join(__dirname, 'dist', 'assets'),
         filename: "bundle.js",
     },
+    plugins: [
+        new CopyPlugin([
+            { from: './node_modules/bootstrap/dist/css/bootstrap.min.css', to: '.' },
+            { from: './node_modules/leaflet/dist/leaflet.css', to: '.' },
+            { from: './client/content.css', to: '.' },
+            { from: './node_modules/leaflet/dist/images/', to: './images/' },
+        ])
+    ],
     module: {
         rules: [{
             test: /.jsx?$/,

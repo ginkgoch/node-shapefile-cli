@@ -1,7 +1,3 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'leaflet/dist/leaflet.css';
-import './content.css';
-
 import axios from "axios";
 import L from 'leaflet';
 import Vue from 'vue/dist/vue.esm';
