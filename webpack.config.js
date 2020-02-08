@@ -12,9 +12,12 @@ module.exports = {
     plugins: [
         new CopyPlugin([
             { from: './node_modules/bootstrap/dist/css/bootstrap.min.css', to: '.' },
+            { from: './node_modules/bootstrap/dist/js/bootstrap.min.js', to: '.' },
+            { from: './node_modules/jquery/dist/jquery.slim.min.js', to: '.' },
+            { from: './node_modules/popper.js/dist/umd/popper.min.js', to: '.' },
             { from: './node_modules/leaflet/dist/leaflet.css', to: '.' },
-            { from: './client/content.css', to: '.' },
             { from: './node_modules/leaflet/dist/images/', to: './images/' },
+            { from: './client/content.css', to: '.' },
         ])
     ],
     module: {

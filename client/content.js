@@ -2,7 +2,7 @@ import axios from "axios";
 import L from 'leaflet';
 import Vue from 'vue/dist/vue.esm';
 
-let { name, filePath, header, features, fields, totalCount } = state;
+let { name, filePath, filePaths, header, features, fields, totalCount } = state;
 
 let getTableData = function (fields, features) {
     let tableData = [];
@@ -27,6 +27,30 @@ new Vue({
     el: '.root',
     data,
     mounted: async function () {
+        const content = document.createElement('div');
+        content.setAttribute('class', 'list-group list-group-flush');
+        filePaths.forEach(f => {
+            const item = document.createElement('a');
+            let fname = f.slice(f.lastIndexOf('/') + 1);
+            let active = '';
+            if (filePath === f) {
+                active = ' active';
+            }
+
+            item.setAttribute('class', 'list-group-item' + active);
+            item.setAttribute('href', '#');
+            item.addEventListener('click', async e => {
+                let r = await axios.post('/', { filePath: f });
+                if (r.data.status === 'success') {
+                    window.location.reload();
+                }
+            });
+            item.innerText = fname;
+            content.appendChild(item);
+        });
+
+        $('[data-toggle="popover"]').popover({ content });
+
         let mapContainer = document.querySelector('#mapContainer');
         let response = await axios.get(`/viewport?width=${mapContainer.clientWidth}&height=${mapContainer.clientHeight}`);
         let { lng, lat, zoom } = response.data;
