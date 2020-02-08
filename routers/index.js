@@ -1,19 +1,24 @@
+const fs = require('fs');
 const path = require('path');
 const Router = require('@koa/router');
 const { ShapefileFeatureSource, GeoUtils, Unit, Srs, ViewportUtils, FeatureCollection } = require('ginkgoch-map').default.all;
 const Utils = require('../shared/Utils');
 
+let currentFilePath = undefined;
+
 module.exports = file => {
+    currentFilePath = file;
     const router = new Router();
+
     router.get('/', async ctx => {
-        const source = new ShapefileFeatureSource(file);
+        const source = new ShapefileFeatureSource(currentFilePath);
         await source.open();
 
         try {
             const shapefile = source.__shapefile;
             const overview = {};
-            overview.name = path.basename(file);
-            overview.filePath = file;
+            overview.name = path.basename(currentFilePath);
+            overview.filePath = currentFilePath;
             overview.header = Utils.getHeader(shapefile);
             overview.features = Utils.getFeatureCollectionJSON(shapefile, 20);
             overview.fields = Utils.getFields(shapefile);
@@ -26,10 +31,26 @@ module.exports = file => {
         }
     });
 
+    router.post('/', async (ctx) => {
+        const filePath = ctx.request.body.filePath;
+        const fileName = path.basename(filePath);
+        if (!fs.existsSync(filePath)) {
+            ctx.throw(404, `File ${fileName} not found.`);
+        }
+
+        if (this.filePath === currentFilePath) {
+            ctx.throw(409, `File ${ path.basename(filePath) } is opened. Please choose another file.`);
+        }
+
+        currentFilePath = filePath;
+        ctx.type = 'json';
+        ctx.body = { status: 'success' };
+    });
+
     router.get('/viewport', async ctx => {
         let { width, height } = ctx.query;
 
-        const source = new ShapefileFeatureSource(file);
+        const source = new ShapefileFeatureSource(currentFilePath);
         await source.open();
 
         try {
@@ -51,7 +72,7 @@ module.exports = file => {
     router.get('/features', async ctx => {
         let { width, height } = ctx.query;
 
-        const source = new ShapefileFeatureSource(file);
+        const source = new ShapefileFeatureSource(currentFilePath);
         await source.open();
 
         try {

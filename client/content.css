@@ -1,6 +1,12 @@
 .title {
     margin-top: 1rem;
     margin-bottom: .5rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.title a {
+    margin-top: 4px;
 }
 
 .map-container {
@@ -24,4 +30,28 @@
 .general-info td {
     text-overflow: ellipsis;
     overflow: hidden;
+}
+
+.file-input {
+    display: none;
+}
+
+/* -----
+SVG Icons - svgicons.sparkk.fr
+----- */
+
+.svg-icon {
+    width: 1.4em;
+    height: 1.4em;
+}
+
+.svg-icon path,
+.svg-icon polygon,
+.svg-icon rect {
+    fill: white;
+}
+
+.svg-icon circle {
+    stroke: white;
+    stroke-width: 1;
 }

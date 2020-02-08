@@ -3,6 +3,7 @@ const static = require('koa-static');
 const path = require('path');
 const fs = require('fs');
 const ejs = require('koa-ejs');
+const bodyParser = require('koa-bodyparser');
 const compress = require('koa-compress');
 const getRouter = require('../routers');
 
@@ -22,6 +23,7 @@ module.exports = (file, cmd) => {
     });
 
     let router = getRouter(file);
+    server.use(bodyParser());
     server.use(compress({
         filter: function (content_type) {
             return /json/i.test(content_type)
