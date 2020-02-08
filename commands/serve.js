@@ -10,7 +10,7 @@ const getRouter = require('../routers');
 module.exports = (file, cmd) => {
     let port = cmd.port || 3000;
     if (!fs.existsSync(file)) {
-        console.error('[Error]', `File ${path.basename(file)} doesn't exist, please set a valid shapefile path and try again.`);
+        console.error('[Error]', `${path.basename(file)} doesn't exist, please set a valid shapefile path or folder and try again.`);
     }
     
     const server = new Koa();
@@ -23,6 +23,10 @@ module.exports = (file, cmd) => {
     });
 
     let router = getRouter(file);
+    if (router === null) {
+        return;
+    }
+
     server.use(bodyParser());
     server.use(compress({
         filter: function (content_type) {

@@ -4,12 +4,31 @@ const Router = require('@koa/router');
 const { ShapefileFeatureSource, GeoUtils, Unit, Srs, ViewportUtils, FeatureCollection } = require('ginkgoch-map').default.all;
 const Utils = require('../shared/Utils');
 
+let currentFilePaths = [];
 let currentFilePath = undefined;
+const validateExtnames = ['.shp', '.shx', '.dbf'];
 
 module.exports = file => {
-    currentFilePath = file;
-    const router = new Router();
+    if (fs.lstatSync(file).isDirectory) {
+        const filenames = fs.readdirSync(file).filter(f => path.extname(f).toLowerCase() === '.shp').map(f => path.resolve(file, f)).filter(f => {
+            let currentExtname = path.extname(f);
+            let isValid = validateExtnames.every(ext => fs.existsSync(f.replace(currentExtname, ext)));
+            return isValid;
+        });
 
+        currentFilePaths = filenames;
+    } else {
+        currentFilePaths = [file];
+    }
+
+    if (currentFilePaths.length > 0) {
+        currentFilePath = currentFilePaths[0];
+    } else {
+        console.error('Cannot found any valid shapefiles.');
+        return null;
+    }
+
+    const router = new Router();
     router.get('/', async ctx => {
         const source = new ShapefileFeatureSource(currentFilePath);
         await source.open();
@@ -19,6 +38,7 @@ module.exports = file => {
             const overview = {};
             overview.name = path.basename(currentFilePath);
             overview.filePath = currentFilePath;
+            overview.filePaths = currentFilePaths;
             overview.header = Utils.getHeader(shapefile);
             overview.features = Utils.getFeatureCollectionJSON(shapefile, 20);
             overview.fields = Utils.getFields(shapefile);
