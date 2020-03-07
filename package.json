@@ -1,6 +1,6 @@
 {
     "name": "ginkgoch-shapefile-cli",
-    "version": "1.4.0",
+    "version": "1.4.1",
     "description": "This is command line tool for inspecting shapefiles.",
     "main": "index.js",
     "scripts": {
@@ -25,7 +25,7 @@
         "bootstrap": "^4.4.1",
         "commander": "^2.17.1",
         "core-js": "3",
-        "ginkgoch-map": "^1.8.15",
+        "ginkgoch-map": "^1.12.1",
         "jquery": "^3.4.1",
         "koa": "^2.11.0",
         "koa-bodyparser": "^4.2.1",
