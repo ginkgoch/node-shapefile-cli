@@ -4,7 +4,7 @@ const _ = require('lodash');
 const IOUtils = require('../shared/IOUtils');
 const SrsUtils = require('../shared/SrsUtils');
 
-const { ShapefileFeatureSource, Srs, ShapefileType, RTRecordType, RTIndex } = require('ginkgoch-map').default.all;
+const { ShapefileFeatureSource, Srs, ShapefileType, RTRecordType, RTIndex, Point } = require('ginkgoch-map').default.all;
 
 module.exports = async (file, cmd) => {
     if (!fs.existsSync(file)) {
@@ -101,7 +101,7 @@ function normalizeSrsSuffix(srs) {
 
 async function setDefaultSrs(source, options) {
     source.projection.to = new Srs(options.outputSrs);
-    if (source.projection.from === undefined) {
+    if (source.projection.from === undefined || source.projection.from.projection === undefined) {
         if (options.sourceSrs !== undefined) {
             source.projection.from = new Srs(options.sourceSrs);
         } else {
