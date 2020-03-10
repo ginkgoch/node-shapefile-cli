@@ -9,7 +9,7 @@ let currentFilePath = undefined;
 const validateExtnames = ['.shp', '.shx', '.dbf'];
 
 module.exports = file => {
-    if (fs.lstatSync(file).isDirectory) {
+    if (fs.lstatSync(file).isDirectory()) {
         const filenames = fs.readdirSync(file).filter(f => path.extname(f).toLowerCase() === '.shp').map(f => path.resolve(file, f)).filter(f => {
             let currentExtname = path.extname(f);
             let isValid = validateExtnames.every(ext => fs.existsSync(f.replace(currentExtname, ext)));
